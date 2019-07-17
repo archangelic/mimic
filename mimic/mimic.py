@@ -4,7 +4,7 @@ import re
 import markovify
 import nltk
 
-class Mimic
+class Mimic:
     model = None
 
     class Text(markovify.Text):
