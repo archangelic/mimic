@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'mimic',
-    packages = ['mimic'],
+    py_modules = ['mimic'],
     install_requires = [
         'nltk',
         'markovify'

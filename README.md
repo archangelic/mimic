@@ -3,7 +3,7 @@ personal module to bootstrap markov projects
 
 ## basic usage
 ``` python
-from mimic.mimic import Mimic
+from mimic import Mimic
 
 markov_model = Mimic()
 markov_model.create_from_file('corpus.txt')
