@@ -9,11 +9,11 @@ class Mimic:
 
     def __init__(self, from_file=None, from_string=None, from_json=None, newline=False, **kwargs):
         if from_file:
-            _from_file(from_file, newline=newline, **kwargs)
+            self._from_file(from_file, newline=newline, **kwargs)
         elif from_string:
-            _from_string(from_string, newline=newline, **kwargs)
+            self._from_string(from_string, newline=newline, **kwargs)
         elif from_json:
-            _from_json(from_json)
+            self._from_json(from_json)
 
     class Text(markovify.Text):
         def word_split(self, sentence):
