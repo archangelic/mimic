@@ -7,6 +7,14 @@ import nltk
 class Mimic:
     model = None
 
+    def __init__(self, from_file=None, from_string=None, from_json=None, newline=False, **kwargs):
+        if from_file:
+            self._from_file(from_file, newline=newline, **kwargs)
+        elif from_string:
+            self._from_string(from_string, newline=newline, **kwargs)
+        elif from_json:
+            self._from_json(from_json)
+
     class Text(markovify.Text):
         def word_split(self, sentence):
             words = re.split(self.word_split_pattern, sentence)
@@ -35,20 +43,34 @@ class Mimic:
         else:
             self.model = self.Text(corpus, **kwargs)
 
-    def create_from_file(self, corpus, newline=False, **kwargs):
+    @classmethod
+    def create_from_file(cls, corpus, newline=False, **kwargs):
+        return cls(from_file=corpus, newline=newline, **kwargs)
+
+    def _from_file(self, corpus, newline=False, **kwargs):
         with open(corpus) as c:
             text = c.read()
         self._create_model(text, newline, **kwargs)
 
-    def create_from_string(self, corpus, newline=False, **kwargs):
+    @classmethod
+    def create_from_string(cls, corpus, newline=False, **kwargs):
+        return cls(from_string=corpus, newline=newline, **kwargs)
+
+    def _from_string(self, corpus, newline=False, **kwargs):
         self._create_model(corpus, newline, **kwargs)
 
-    def from_json(self, _json):
+    @classmethod
+    def from_json(cls, _json):
+        return cls(from_json=_json)
+
+    def _from_json(self, _json):
         self.model = self.Text.from_json(_json)
 
-    def from_json_file(self, _json_file):
+    @classmethod
+    def from_json_file(cls, _json_file):
         with open(_json_file) as j:
-            self.model = self.Text.from_json(json.load(j))
+            jdict = json.load(j)
+        return cls(from_json=jdict)
 
     def to_json_file(self, _json_file):
         with open(_json_file) as j:

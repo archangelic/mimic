@@ -5,8 +5,7 @@ personal module to bootstrap markov projects
 ``` python
 from mimic import Mimic
 
-markov_model = Mimic()
-markov_model.create_from_file('corpus.txt')
+markov_model = Mimic.create_from_file('corpus.txt')
 
 markov_model.make_sentence()
 ```
