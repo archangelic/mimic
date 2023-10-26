@@ -69,7 +69,7 @@ class Mimic:
     @classmethod
     def from_json_file(cls, _json_file):
         with open(_json_file) as j:
-            jdict = json.load(j)
+            jdict = j.read()
         return cls(from_json=jdict)
 
     def to_json_file(self, _json_file):
